@@ -5,9 +5,9 @@ import type{ IUser, UserState } from "../../types/usera.types";
 // GET user by ID
 export const fetchUsers = createAsyncThunk<IUser[]>(
   "user/fetchUsers",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, signal }) => {
     try {
-      const res = await API.get("/users/get/users"); // Replace with your actual backend route
+      const res = await API.get("/users/get/users",{signal}); // Replace with your actual backend route
       return res.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Failed to fetch users");

@@ -58,8 +58,13 @@ const ManageUsers: React.FC = () => {
   const { searchInput } = useActivePage();
   // Fetch users on component mount and when filters change
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+  const req = dispatch(fetchUsers());
+
+  return () => {
+    req.abort(); // cancel the request if still in progress
+  };
+}, [dispatch]);
+
   useEffect(() => {
     if (searchInput) {
       dispatch(filterUsers(searchInput));
