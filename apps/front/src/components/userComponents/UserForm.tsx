@@ -81,27 +81,31 @@ const UserForm: React.FC<UserFormProps> = ({
   };
   return (
     <Form
-      form={form}
-      layout="vertical"
-      onFinish={handleSubmit}
-      initialValues={{
-        role: "user",
-        isActive: true,
-        isVerified: false,
-        subscriptionType: "free",
-        subscriptionStatus: "pending",
-        preferences: {
-          theme: "light",
-          language: "en",
-          notifications: {
-            email: true,
-            push: false,
-            sms: false,
-          },
-        },
-        ...initialValues,
-      }}
-    >
+  form={form}
+  layout="vertical"
+  onFinish={handleSubmit}
+  initialValues={{
+    role: "user",
+    isActive: true,
+    isVerified: false,
+    subscriptionType: "free",
+    subscriptionStatus: "pending",
+    preferences: {
+      theme: "light",
+      language: "en",
+      notifications: {
+        email: true,
+        push: false,
+        sms: false,
+      },
+    },
+    ...initialValues,
+    dateOfBirth: initialValues?.dateOfBirth
+      ? moment(initialValues.dateOfBirth)
+      : null,
+  }}
+>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Column */}
         <div>
